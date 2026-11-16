@@ -52,11 +52,38 @@
  .zoom-help{grid-column:1/-1;grid-row:9;margin:0}
  .nextCard{width:min(280px,88%)}
 }
+.landscape-jump{display:none}
+@media(min-width:560px) and (max-width:999px) and (orientation:landscape){
+ main{max-width:100%;padding:8px max(12px,env(safe-area-inset-left)) max(24px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-right))}
+ header h1{font-size:20px;margin:4px 0}
+ .landscape-jump{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border:1px solid #74b4ff;border-radius:10px;background:#2875d5;color:white;text-decoration:none;white-space:nowrap}
+ .player-panel{display:block;padding:10px;margin-top:8px}
+ .player-panel>.row{flex-wrap:wrap}.player-panel>label{display:block;margin-bottom:4px}
+ .play-area{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,1fr);grid-template-rows:auto auto auto 1fr auto auto auto auto;gap:8px 12px;margin-top:10px;scroll-margin-top:6px;align-items:start}
+ .game-panel{display:contents}
+ #games{grid-column:1/-1;grid-row:1;flex-wrap:nowrap;gap:6px}
+ #games button{min-width:0;min-height:44px;font-size:13px;padding:8px 4px}
+ #boardwrap{grid-column:1;grid-row:2/5;width:100%;max-width:min(100%,max(220px,calc(100dvh - 68px)));margin:0 auto;align-self:start}
+ .score-panel{display:block;grid-column:2;grid-row:2;padding:8px 10px;background:#1b2940;border:1px solid #34445e;border-radius:12px;margin:0}
+ .score-panel small{font-size:11px}.score{font-size:28px}#status{font-size:15px;font-weight:700}
+ #target:empty,#marks:empty{display:none}#target{font-size:12px;margin-top:4px}
+ #marks{gap:4px;margin-top:5px}#marks span{font-size:11px;padding:4px}
+ .board-controls{grid-column:2;grid-row:3;gap:6px;justify-content:stretch}
+ .board-controls>.row{display:contents}.board-controls button{flex:1;min-height:44px;font-size:12px;padding:8px 5px;white-space:nowrap}
+ .throw-panel{display:block;grid-column:2;grid-row:4;min-width:0}
+ #notice:empty{display:none}#notice{font-size:12px;margin-bottom:4px}
+ .pills{gap:6px;flex-wrap:nowrap}.pill{flex:1;min-width:0;padding:5px}.pill small{font-size:11px}.pill strong{font-size:20px}
+ .throw-panel>.row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px!important}
+ .throw-panel button{min-height:44px;padding:8px 4px;font-size:13px}#commit{background:#2875d5;border-color:#74b4ff;font-weight:700}#nextGame{grid-column:1/-1}
+ .history-panel{grid-column:1/-1;grid-row:5;margin:0;padding:10px}.history{max-height:150px}
+ #rules{grid-column:1/-1;grid-row:6;margin:0}.play-help{grid-column:1/-1;grid-row:7;margin:0}.zoom-help{grid-column:1/-1;grid-row:8;margin:0}
+ .nextCard{padding:10px;width:min(250px,92%)}#next{font-size:20px;min-height:44px;padding:10px 4px}#nextSummary{font-size:12px;margin-bottom:6px}#nextDetail{font-size:11px;margin:5px}#overlayUndo{min-height:44px;padding:8px}
+}
 </style></head><body><main>
-<header><div><h1>🎯 PENTATHLON TOUCH</h1><small>5種目の採点・端末内保存 / V12</small></div></header>
+<header><div><h1>🎯 PENTATHLON TOUCH</h1><small>5種目の採点・端末内保存 / V12</small></div><a class="landscape-jump" href="#play-area">採点へ ↓</a></header>
 
 <section class="panel player-panel"><label for="name">プレーヤー名（最大16人）</label><div class="row"><input id="name" placeholder="プレーヤー名" maxlength="24"><button id="add">＋ 追加</button></div><div class="row" style="margin-top:10px"><label for="player">プレーヤー</label><select id="player"></select><button id="remove">選択者を削除</button><button id="restore" hidden>削除を戻す</button></div></section>
-<div class="play-area"><section class="panel game-panel"><div class="tabs" id="games"></div><p id="rules" class="hint"></p><div class="score-panel"><div class="row space"><div><small>現在の種目 / ラウンド</small><div id="status"></div></div><div style="text-align:right"><small id="scoreLabel"></small><div class="score" id="total" aria-live="polite"></div></div></div><div id="target"></div><div id="marks"></div></div>
+<div class="play-area" id="play-area"><section class="panel game-panel"><div class="tabs" id="games"></div><p id="rules" class="hint"></p><div class="score-panel"><div class="row space"><div><small>現在の種目 / ラウンド</small><div id="status"></div></div><div style="text-align:right"><small id="scoreLabel"></small><div class="score" id="total" aria-live="polite"></div></div></div><div id="target"></div><div id="marks"></div></div>
 <p class="hint play-help">1投ずつタップ。3投後に中央の Next Round で確定します。種目終了時は「次の種目へ」、最後は「総合結果を見る」で進みます。フィニッシュ・バーストは途中でも確定できます。</p><div class="row space board-controls"><div class="row"><button id="normal">標準</button><button id="large">ブル・D・T拡大</button></div><button id="miss">MISS（0点）</button></div><p class="hint zoom-help">拡大ではブルとダブル／トリプルの領域を広げます。点数は変わりません。</p>
 <div id="boardwrap" class="boardwrap"><svg id="board" viewBox="-225 -225 450 450" role="group" aria-label="タップ可能なダーツボード"></svg><div id="nextOverlay" hidden><div class="nextCard" role="group" aria-label="ラウンド確定"><div id="nextSummary" aria-live="polite"></div><button id="next">Next Round</button><div id="nextDetail"></div><button id="overlayUndo">↶ 1本戻して修正</button></div></div></div>
 <div class="throw-panel"><div id="notice" role="status"></div><div class="pills" id="throws"></div><div class="row" style="margin-top:12px"><button id="undo">↶ 1本戻す</button><button id="commit">ラウンド確定</button><button id="nextGame" hidden>次の種目へ</button></div></div></section>

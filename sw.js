@@ -1,6 +1,6 @@
 'use strict';
 // Change VERSION whenever any app-shell file changes. Publish all files together.
-const VERSION = '2026-11-16.3';
+const VERSION = '2026-11-16.4';
 const PREFIX = 'pentathlon-touch-pwa-' + self.registration.scope;
 const CACHE = PREFIX + VERSION;
 const url = path => new URL(path, self.registration.scope).href;

@@ -8,15 +8,59 @@
 <meta name="apple-mobile-web-app-title" content="PENTATHLON">
 <title>PENTATHLON TOUCH</title><style>
 :root{font-family:system-ui,-apple-system,sans-serif;color:#f4f7ff;background:#101a2b}*{box-sizing:border-box}body{margin:0}main{max-width:760px;margin:auto;padding:16px 14px 48px}header{display:flex;align-items:center;justify-content:space-between;gap:12px}h1{font-size:22px;margin:8px 0}small,.muted{color:#aebdd3}button,input,select{font:inherit}button{border:1px solid #40516d;background:#263751;color:white;padding:11px 13px;border-radius:12px;cursor:pointer;touch-action:manipulation}button.active,#next{background:#2875d5;border-color:#74b4ff}button:disabled{opacity:.4}button:focus-visible,[role=button]:focus-visible{outline:3px solid #ffd568}.panel{background:#1b2940;border:1px solid #34445e;border-radius:16px;padding:14px;margin-top:12px}.tabs,.row{display:flex;gap:7px;flex-wrap:wrap;align-items:center}.tabs button{flex:1;min-width:80px;padding:10px 4px;font-size:13px}.row input{flex:1;min-width:120px;background:#0e192a;color:white;border:1px solid #52617b;border-radius:10px;padding:12px}.row select{background:#0e192a;color:white;border:1px solid #52617b;border-radius:10px;padding:10px;max-width:100%}.space{justify-content:space-between}.boardwrap{position:relative;max-width:520px;margin:10px auto;touch-action:manipulation}svg{width:100%;display:block;touch-action:manipulation}svg [data-hit]{cursor:pointer}.score{font-size:30px;font-weight:800}.pills{display:flex;gap:8px;flex-wrap:wrap}.pill{background:#314564;border-radius:9px;padding:8px 12px;min-width:66px;text-align:center}.pill strong{display:block}.hint{font-size:13px;color:#bac9db;line-height:1.7}.history{max-height:230px;overflow:auto}.entry{border-top:1px solid #34445e;padding:9px 0;font-size:14px}#notice{color:#ffdc87;min-height:18px;font-size:13px}footer{margin-top:16px;font-size:12px;color:#b0bed1;line-height:1.7}a{color:#9dcaff}[hidden]{display:none!important}#nextOverlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#08111c88;border-radius:50%;z-index:2}.nextCard{width:min(280px,88%);text-align:center;background:#14233bf5;border:1px solid #84b5ff;border-radius:18px;padding:18px;box-shadow:0 10px 30px #0008}#next{width:100%;font-size:25px;font-weight:800;padding:17px 8px}#nextSummary{margin-bottom:12px;font-size:14px}#nextDetail{margin:8px;font-size:12px}#overlayUndo{font-size:12px}#target{color:#ffdc87;font-weight:700;margin-top:8px}#marks{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}#marks span{background:#314564;padding:7px;border-radius:7px}#marks .closed{background:#206347}.result{display:flex;gap:8px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid #34445e}.result strong,.result b{flex-basis:100%}.result span{font-size:13px}.rating{flex-basis:100%;font-size:19px;font-weight:800;color:#ffdc87;padding:10px 12px;background:#263751;border-radius:10px}.ratingTable{width:100%;border-collapse:collapse;font-size:13px}.ratingTable td,.ratingTable th{text-align:left;padding:7px;border-bottom:1px solid #34445e}details{margin-top:12px}summary{cursor:pointer}#legacy{border-color:#8a7236}label{font-size:13px}@media(max-width:420px){h1{font-size:18px}main{padding:10px 8px 36px}.panel{padding:10px}.nextCard{padding:12px}}
+
+/* Tablet layout uses the same controls and scoring state at every size. */
+.score-panel,.throw-panel{display:contents}
+@media(min-width:700px){
+ main{max-width:960px;padding:16px max(18px,env(safe-area-inset-left)) max(36px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-right))}
+ header h1{font-size:26px}button,input,select{min-height:48px}
+ .player-panel{display:grid;grid-template-columns:minmax(200px,1fr) minmax(310px,1.25fr);column-gap:18px;align-items:center}
+ .player-panel>label{grid-column:1/-1;margin-bottom:6px}
+ .player-panel>.row{margin-top:0!important;flex-wrap:nowrap}
+ .player-panel select{flex:1;min-width:0}.player-panel button{white-space:nowrap;padding:10px}
+ .tabs{flex-wrap:nowrap}.tabs button{font-size:16px;min-width:0;padding:12px 6px}
+ .boardwrap{width:100%;max-width:min(700px,calc(100dvh - 560px));margin:12px auto}
+ .score{font-size:42px}#status{font-size:20px;font-weight:700}
+ .pills{gap:12px}.pill{flex:1;padding:12px}.pill strong{font-size:24px}
+ #undo,#commit{flex:1}#commit{background:#2875d5;border-color:#74b4ff;font-weight:700}
+ .history{max-height:260px}.entry{font-size:16px;padding:12px 0}
+ .game-panel{display:flex;flex-direction:column}
+ #games{order:0}.score-panel{display:block;order:1;margin-top:12px}
+ #boardwrap{order:2}.board-controls{order:3}.throw-panel{display:block;order:4}
+ #rules{order:5}.play-help{order:6}.zoom-help{order:7}
+ .game-panel>.hint{margin:6px 0;font-size:12px}
+}
+@media(min-width:1000px) and (orientation:landscape){
+ main{max-width:1440px;padding-top:12px}header h1{font-size:24px;margin:4px 0}
+ .player-panel{margin-top:10px;padding:10px 14px;grid-template-columns:auto minmax(200px,1fr) minmax(350px,1.3fr);gap:12px}
+ .player-panel>label{grid-column:auto;margin:0;font-size:12px}
+ .play-area{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(330px,1fr);grid-template-rows:auto auto auto 1fr auto auto auto auto;gap:10px 18px;margin-top:12px;align-items:start}
+ .game-panel{display:contents}
+ #games{grid-column:1/-1;grid-row:1}
+ .score-panel{grid-column:2;grid-row:2;margin:0;padding:14px;background:#1b2940;border:1px solid #34445e;border-radius:16px}
+ #boardwrap{grid-column:1;grid-row:2/6;max-width:min(100%,calc(100dvh - 330px));margin:0 auto;align-self:center}
+ .board-controls{grid-column:1;grid-row:6;justify-content:center}
+ .throw-panel{grid-column:2;grid-row:3;padding:0 2px}
+ #notice:empty{min-height:0}#notice:not(:empty){margin-bottom:8px}
+ .throw-panel>.row{display:grid;grid-template-columns:1fr 1fr}
+ #nextGame{grid-column:1/-1}
+ .history-panel{grid-column:2;grid-row:4/7;margin:0;min-width:0;padding:12px}
+ .history-panel .row{gap:5px}.history-panel button{font-size:12px;min-height:40px;padding:8px}
+ .history{max-height:clamp(90px,calc(100dvh - 600px),260px)}
+ #rules{grid-column:1/-1;grid-row:7;margin:2px 0}
+ .play-help{grid-column:1/-1;grid-row:8;margin:0}
+ .zoom-help{grid-column:1/-1;grid-row:9;margin:0}
+ .nextCard{width:min(280px,88%)}
+}
 </style></head><body><main>
 <header><div><h1>🎯 PENTATHLON TOUCH</h1><small>5種目の採点・端末内保存 / V12</small></div></header>
 
-<section class="panel"><label for="name">プレーヤー名（最大16人）</label><div class="row"><input id="name" placeholder="プレーヤー名" maxlength="24"><button id="add">＋ 追加</button></div><div class="row" style="margin-top:10px"><label for="player">プレーヤー</label><select id="player"></select><button id="remove">選択者を削除</button><button id="restore" hidden>削除を戻す</button></div></section>
-<section class="panel"><div class="tabs" id="games"></div><p id="rules" class="hint"></p><div class="row space"><div><small>現在の種目 / ラウンド</small><div id="status"></div></div><div style="text-align:right"><small id="scoreLabel"></small><div class="score" id="total" aria-live="polite"></div></div></div><div id="target"></div><div id="marks"></div>
-<p class="hint">1投ずつタップ。3投後に中央の Next Round で確定します。種目終了時は「次の種目へ」、最後は「総合結果を見る」で進みます。フィニッシュ・バーストは途中でも確定できます。</p><div class="row space"><div class="row"><button id="normal">標準</button><button id="large">ブル・D・T拡大</button></div><button id="miss">MISS（0点）</button></div><p class="hint">拡大ではブルとダブル／トリプルの領域を広げます。点数は変わりません。</p>
+<section class="panel player-panel"><label for="name">プレーヤー名（最大16人）</label><div class="row"><input id="name" placeholder="プレーヤー名" maxlength="24"><button id="add">＋ 追加</button></div><div class="row" style="margin-top:10px"><label for="player">プレーヤー</label><select id="player"></select><button id="remove">選択者を削除</button><button id="restore" hidden>削除を戻す</button></div></section>
+<div class="play-area"><section class="panel game-panel"><div class="tabs" id="games"></div><p id="rules" class="hint"></p><div class="score-panel"><div class="row space"><div><small>現在の種目 / ラウンド</small><div id="status"></div></div><div style="text-align:right"><small id="scoreLabel"></small><div class="score" id="total" aria-live="polite"></div></div></div><div id="target"></div><div id="marks"></div></div>
+<p class="hint play-help">1投ずつタップ。3投後に中央の Next Round で確定します。種目終了時は「次の種目へ」、最後は「総合結果を見る」で進みます。フィニッシュ・バーストは途中でも確定できます。</p><div class="row space board-controls"><div class="row"><button id="normal">標準</button><button id="large">ブル・D・T拡大</button></div><button id="miss">MISS（0点）</button></div><p class="hint zoom-help">拡大ではブルとダブル／トリプルの領域を広げます。点数は変わりません。</p>
 <div id="boardwrap" class="boardwrap"><svg id="board" viewBox="-225 -225 450 450" role="group" aria-label="タップ可能なダーツボード"></svg><div id="nextOverlay" hidden><div class="nextCard" role="group" aria-label="ラウンド確定"><div id="nextSummary" aria-live="polite"></div><button id="next">Next Round</button><div id="nextDetail"></div><button id="overlayUndo">↶ 1本戻して修正</button></div></div></div>
-<div id="notice" role="status"></div><div class="pills" id="throws"></div><div class="row" style="margin-top:12px"><button id="undo">↶ 1本戻す</button><button id="commit">ラウンド確定</button><button id="nextGame" hidden>次の種目へ</button></div></section>
-<section class="panel"><div class="row space"><strong>ラウンド履歴</strong><button id="deleteRound">前ラウンドを修正</button></div><div class="history" id="history"></div></section>
+<div class="throw-panel"><div id="notice" role="status"></div><div class="pills" id="throws"></div><div class="row" style="margin-top:12px"><button id="undo">↶ 1本戻す</button><button id="commit">ラウンド確定</button><button id="nextGame" hidden>次の種目へ</button></div></div></section>
+<section class="panel history-panel"><div class="row space"><strong>ラウンド履歴</strong><button id="deleteRound">前ラウンドを修正</button></div><div class="history" id="history"></div></section></div>
 <section class="panel"><strong>ペンタスロン総合得点</strong><div id="results"></div><p class="hint">換算点は種目終了時に確定します。未完了の種目は合計に含みません。</p><details><summary>評価の目安</summary><table class="ratingTable"><thead><tr><th>合計点</th><th>評価</th></tr></thead><tbody><tr><td>0〜5</td><td>New Player</td></tr><tr><td>6〜30</td><td>Novice</td></tr><tr><td>31〜50</td><td>Beginner</td></tr><tr><td>51〜100</td><td>Intermediate</td></tr><tr><td>101〜170</td><td>Good</td></tr><tr><td>171〜220</td><td>Semi-Pro</td></tr><tr><td>221〜270</td><td>Top Semi-Pro</td></tr><tr><td>271〜350</td><td>Professional</td></tr><tr><td>351〜450</td><td>Master</td></tr><tr><td>451以上</td><td>Grand Master</td></tr></tbody></table></details><button id="export">記録を書き出す</button><details><summary>記録の管理</summary><button id="reset">全記録をクリア</button><p class="hint">最後の削除は「削除を戻す」で復元できます。</p></details></section>
 <footer>記録はこの端末・ブラウザに保存されます。友人の端末とは同期しません。<br>301は13R、501は15R、NP Cricketは14Rが上限です。バーストは1ラウンド＝3本として数え、フィニッシュは実投数を数えます。</footer>
 <section class="panel" aria-label="アプリの利用と更新">

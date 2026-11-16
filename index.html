@@ -11,12 +11,12 @@
 
 /* Tablet layout uses the same controls and scoring state at every size. */
 .score-panel,.throw-panel{display:contents}
-@media(min-width:700px){
+@media(min-width:700px) and (min-height:600px){
  main{max-width:960px;padding:16px max(18px,env(safe-area-inset-left)) max(36px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-right))}
  header h1{font-size:26px}button,input,select{min-height:48px}
  .player-panel{display:grid;grid-template-columns:minmax(200px,1fr) minmax(310px,1.25fr);column-gap:18px;align-items:center}
  .player-panel>label{grid-column:1/-1;margin-bottom:6px}
- .player-panel>.row{margin-top:0!important;flex-wrap:nowrap}
+ .player-panel>.row{margin-top:0!important;flex-wrap:wrap}
  .player-panel select{flex:1;min-width:0}.player-panel button{white-space:nowrap;padding:10px}
  .tabs{flex-wrap:nowrap}.tabs button{font-size:16px;min-width:0;padding:12px 6px}
  .boardwrap{width:100%;max-width:min(700px,calc(100dvh - 560px));margin:12px auto}
